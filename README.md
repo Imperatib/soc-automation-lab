@@ -8,7 +8,7 @@
 
 ## Overview
 
-A collection of SOC automation scripts and Splunk/Sentinel detection rules built to demonstrate the automation patterns I use professionally — reducing alert fatigue and accelerating triage and incident response.
+A collection of SOC automation scripts and Splunk detection rules built to demonstrate the automation patterns I use professionally — reducing alert fatigue and accelerating triage and incident response.
 
 ---
 
@@ -16,7 +16,7 @@ A collection of SOC automation scripts and Splunk/Sentinel detection rules built
 
 ```
 soc-automation-lab/
-├── detection-rules/     # Splunk correlation rules & Sentinel KQL detections, MITRE ATT&CK-mapped
+├── detection-rules/     # Splunk correlation rules, MITRE ATT&CK-mapped
 ├── ir-playbooks/         # Automated IR playbook orchestrator + response playbooks
 ├── triage-tools/         # IOC enrichment and alert triage utilities
 └── README.md
@@ -29,7 +29,7 @@ soc-automation-lab/
 ## What's Here
 
 ### `detection-rules/`
-Splunk correlation rules and Sentinel KQL detections mapped to MITRE ATT&CK, covering:
+Splunk correlation rules mapped to MITRE ATT&CK, covering:
 
 | Rule Name                       | MITRE Tactic      | Technique |
 | -------------------------------- | ------------------ | --------- |
@@ -39,12 +39,13 @@ Splunk correlation rules and Sentinel KQL detections mapped to MITRE ATT&CK, cov
 | Data Exfil via DNS Tunneling     | Exfiltration        | T1048.003 |
 | Persistence via Scheduled Task   | Persistence         | T1053.005 |
 | Defense Evasion – Log Clearing   | Defense Evasion     | T1070.001 |
+| Off-Hours Privileged Login       | Initial Access      | T1078     |
 
 ### `ir-playbooks/`
-`playbook_runner.py` — automated incident response orchestrator that ingests SIEM/ConnectWise alert payloads and executes containment steps (endpoint isolation, account disable, IOC blocking) with a logged audit trail.
+`playbook_runner.py` — playbook-driven IR orchestrator that ingests SIEM/ConnectWise-style alert payloads and **simulates** containment steps (endpoint isolation, account disable, IOC blocking) with a logged audit trail. Integration points for real EDR/AD/firewall APIs are marked in the code.
 
 ### `triage-tools/`
-IOC enrichment utilities that query threat intel sources (VirusTotal, AbuseIPDB) to speed up analyst triage before manual review.
+`ioc_enricher.py` — IOC enrichment framework with VirusTotal, AbuseIPDB and AlienVault OTX integration points and structured triage reports. Lookups currently return **simulated sample data**; add your own API keys and replace the marked functions to run live.
 
 ---
 
@@ -53,7 +54,7 @@ IOC enrichment utilities that query threat intel sources (VirusTotal, AbuseIPDB)
 ```bash
 git clone https://github.com/Imperatib/soc-automation-lab.git
 cd soc-automation-lab
-pip install -r requirements.txt
+# Python 3.8+, standard library only (no extra packages required)
 ```
 
 See individual scripts in `ir-playbooks/` and `triage-tools/` for usage flags and sample inputs.
