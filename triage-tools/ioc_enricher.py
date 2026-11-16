@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
 ioc_enricher.py — Automated IOC Enrichment Engine
-Author: [Your Name] | SOC Automation Lab
+Author: Brandon Imperati | SOC Automation Lab
 Description:
-    Enriches raw IOCs (IPs, domains, file hashes) from SIEM alerts against
-    multiple threat intelligence APIs. Produces a structured report for
+    Framework for enriching raw IOCs (IPs, domains, file hashes) from SIEM alerts against
+    threat intelligence APIs. Lookups currently return simulated sample data;
+    live API calls are marked integration points. Produces a structured report for
     analyst review — eliminating manual lookups and accelerating triage.
 
 Supported feeds:
@@ -52,7 +53,7 @@ def detect_ioc_type(ioc: str) -> str:
     return "unknown"
 
 
-# ── Mock Enrichment (replace with real API calls) ────────────────────────────
+# ── SIMULATED enrichment: returns sample data. Replace with live API calls using your own keys ────────────────────────────
 def enrich_virustotal(ioc: str, ioc_type: str) -> dict:
     """
     Query VirusTotal for the given IOC.
