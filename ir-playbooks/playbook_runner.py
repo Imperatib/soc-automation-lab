@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 playbook_runner.py — Automated Incident Response Playbook Orchestrator
-Author: [Your Name] | SOC Automation Lab
+Author: Brandon Imperati | SOC Automation Lab
 Description:
     Ingests SIEM alerts (Splunk/ConnectWise webhook format) and executes
     the appropriate incident response playbook based on alert classification.
@@ -68,7 +68,7 @@ class PlaybookRunner:
         description = step.get("description", "")
         log.info(f"[{self.alert_id}] EXECUTING: {action} — {description}")
 
-        # Simulate step execution (replace with real API calls in production)
+        # SIMULATED execution: logs the action and audit trail only. Replace with real EDR/AD/firewall API calls.
         result = {
             "step": action,
             "description": description,
